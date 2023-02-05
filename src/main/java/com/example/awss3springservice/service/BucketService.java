@@ -22,4 +22,12 @@ public class BucketService {
         return null;
     }
 
+    public void listOfBuckets() {
+        List<Bucket> buckets = amazonConfig.amazonS3Config().listBuckets();
+        System.out.println("List of buckets on your account.");
+        for (Bucket bucket: buckets) {
+            System.out.format("-> %s\n", bucket.getName());
+        }
+    }
+
 }
