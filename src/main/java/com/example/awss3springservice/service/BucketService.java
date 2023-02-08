@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Slf4j
-@Service
 public class BucketService {
 
     @Autowired
@@ -39,15 +38,21 @@ public class BucketService {
     public Bucket createBucket(String bucket) {
         final AmazonS3 s3 = amazonConfig.amazonS3Config();
         Bucket newBucket = null;
+
         boolean doesExist = s3.doesBucketExistV2(bucket);
         if (doesExist) {
-            newBucket = findBucket(bucket);
-        } else {
             try {
-                newBucket = s3.createBucket(bucket);
-            } catch (AmazonS3Exception e) {
-                log.info("Error in to create bucket: {}", bucket);
+                newBucket = findBucket(bucket);
+            } catch (AmazonS3Exception e){
+                log.info("Error in find bucket.");
             }
+            return newBucket;
+        }
+
+        try {
+            newBucket = s3.createBucket(bucket);
+        } catch (AmazonS3Exception e) {
+            log.info("Error in to create bucket: {}", bucket);
         }
 
         return newBucket;
