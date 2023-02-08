@@ -22,6 +22,11 @@ public class ObjectS3ServiceImpl implements ObjectS3Service {
         filePath = "/home/imagens/" + filePath;
         String keyName = Paths.get(filePath).getFileName().toString();
 
+        if (!fileVerificationType(filePath)) {
+            log.info("File is not image");
+            return false;
+        }
+
         AmazonS3 s3 = amazonConfig.amazonS3Config();
 
         try {
@@ -30,6 +35,19 @@ public class ObjectS3ServiceImpl implements ObjectS3Service {
             log.info("Error in to make upload object.");
         }
         return true;
+    }
+
+    public boolean fileVerificationType(String filePath) {
+        String fileName = new File(filePath).getName();
+
+        if(fileName.contains(".png") || fileName.contains(".jpeg") || fileName.contains(".jpg")) {
+            log.info("This file is an image, o update will to continue.");
+            return true;
+        }
+
+        int positionAfterDot = fileName.lastIndexOf(".");
+        log.info("The file is not an image.", fileName.substring(positionAfterDot + 1));
+        return false;
     }
 
 }
