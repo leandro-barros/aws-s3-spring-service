@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Slf4j
+@Service
 public class BucketService {
 
     @Autowired
@@ -27,12 +28,15 @@ public class BucketService {
         return null;
     }
 
-    public void listOfBuckets() {
+    public List<Bucket> listOfBuckets() {
         List<Bucket> buckets = amazonConfig.amazonS3Config().listBuckets();
-        System.out.println("List of buckets on your account.");
+        log.info("List of buckets on your account.");
+
         for (Bucket bucket: buckets) {
             System.out.format("-> %s\n", bucket.getName());
         }
+
+        return buckets;
     }
 
     public Bucket createBucket(String bucket) {
