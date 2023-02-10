@@ -1,4 +1,4 @@
 aws:
   s3:
-    access-key-id: ${access-key-id}
-    secrect-access-key: ${secrect-access-key}
+    access-key-id: ${ACCESS-KEY-ID}
+    secrect-access-key: ${SECRET-ACCESS-KEY}
