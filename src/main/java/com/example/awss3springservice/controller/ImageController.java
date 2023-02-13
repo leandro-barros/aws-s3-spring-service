@@ -7,10 +7,7 @@ import com.example.awss3springservice.service.BucketService;
 import com.example.awss3springservice.service.ObjectS3Service;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -36,6 +33,13 @@ public class ImageController {
     @GetMapping("/buckets/{bucketName}/objects")
     public ResponseEntity<List<S3ObjectSummary>> listObjects(@PathVariable String bucketName) {
         return ResponseEntity.ok(objectS3Service.listObjectsS3(bucketName));
+    }
+
+    @PutMapping("/put/objects/{bucketName}/{filePath}")
+    public ResponseEntity<?> uploadImage(@PathVariable String bucketName,
+                                         @PathVariable String filePath) {
+        objectS3Service.uploadObject(bucketName, filePath);
+        return ResponseEntity.ok("Upload success!");
     }
 
 }
