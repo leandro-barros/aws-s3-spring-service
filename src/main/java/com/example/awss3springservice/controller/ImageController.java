@@ -25,21 +25,26 @@ public class ImageController {
         return ResponseEntity.ok(bucketService.listOfBuckets());
     }
 
-    @GetMapping("/buckets/{bucketName}")
+    @GetMapping("/bucket/{bucketName}")
     public ResponseEntity<Bucket> findBucketByName(@PathVariable String bucketName) {
         return ResponseEntity.ok(bucketService.findBucket(bucketName));
     }
 
-    @GetMapping("/buckets/{bucketName}/objects")
+    @GetMapping("/bucket/{bucketName}/objects")
     public ResponseEntity<List<S3ObjectSummary>> listObjects(@PathVariable String bucketName) {
         return ResponseEntity.ok(objectS3Service.listObjectsS3(bucketName));
     }
 
-    @PutMapping("/put/objects/{bucketName}/{filePath}")
+    @PutMapping("/put/upload/object/{bucketName}/{filePath}")
     public ResponseEntity<?> uploadImage(@PathVariable String bucketName,
                                          @PathVariable String filePath) {
         objectS3Service.uploadObject(bucketName, filePath);
         return ResponseEntity.ok("Upload success!");
+    }
+
+    @PutMapping("/put/bucket/{bucketName}")
+    public ResponseEntity<?> createBucket(@PathVariable String bucketName) {
+        return ResponseEntity.ok(bucketService.createBucket(bucketName));
     }
 
 }
