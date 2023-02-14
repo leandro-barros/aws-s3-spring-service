@@ -1,7 +1,6 @@
 package com.example.awss3springservice.controller;
 
 import com.amazonaws.services.s3.model.Bucket;
-import com.amazonaws.services.s3.model.ListObjectsV2Result;
 import com.amazonaws.services.s3.model.S3ObjectSummary;
 import com.example.awss3springservice.service.BucketService;
 import com.example.awss3springservice.service.ObjectS3Service;
