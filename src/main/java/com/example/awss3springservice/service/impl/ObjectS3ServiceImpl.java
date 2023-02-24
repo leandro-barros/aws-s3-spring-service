@@ -24,7 +24,6 @@ public class ObjectS3ServiceImpl implements ObjectS3Service {
 
     @Override
     public boolean uploadObject(String bucketName, String filePath) {
-        // filePath = "/home/imagens/" + filePath;
         String keyName = Paths.get(filePath).getFileName().toString();
 
         if (!fileVerificationType(filePath)) {
