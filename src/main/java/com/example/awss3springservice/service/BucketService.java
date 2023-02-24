@@ -4,18 +4,18 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.AmazonS3Exception;
 import com.amazonaws.services.s3.model.Bucket;
 import com.example.awss3springservice.config.AmazonConfig;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@AllArgsConstructor
 @Slf4j
 @Service
 public class BucketService {
 
-    @Autowired
-    private AmazonConfig amazonConfig;
+    private final AmazonConfig amazonConfig;
 
     public Bucket findBucket(String bucketName) {
         List<Bucket> buckets = amazonConfig.amazonS3Config().listBuckets();

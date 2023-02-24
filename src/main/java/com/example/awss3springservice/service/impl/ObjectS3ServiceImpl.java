@@ -7,20 +7,20 @@ import com.amazonaws.services.s3.model.PutObjectResult;
 import com.amazonaws.services.s3.model.S3ObjectSummary;
 import com.example.awss3springservice.config.AmazonConfig;
 import com.example.awss3springservice.service.ObjectS3Service;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.nio.file.Paths;
 import java.util.List;
 
+@AllArgsConstructor
 @Service
 @Slf4j
 public class ObjectS3ServiceImpl implements ObjectS3Service {
 
-    @Autowired
-    private AmazonConfig amazonConfig;
+    private final AmazonConfig amazonConfig;
 
     @Override
     public boolean uploadObject(String bucketName, String filePath) {
